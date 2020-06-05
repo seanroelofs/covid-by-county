@@ -10,7 +10,11 @@ census = pd.read_csv("census.csv")
 census = census[census['State'] != "Puerto Rico"]
 census = census[census['State'] != "District of Columbia"]
 census["GenderRatio"] = census["Men"]/(census["Men"] + census["Women"])
+
+
+
 census = pd.concat([census, pd.get_dummies(census['State'], prefix = 'State', drop_first = True)], axis=1).drop(['State'], axis = 1)
+
 drop_labels = ["IncomeErr", "IncomePerCapErr", "Production", "OtherTransp", "FamilyWork", "Men", "Women"]
 census.drop(drop_labels, 'columns', inplace = True)
 headers_to_mod = ["Hispanic", "White", "Black", "Native", "Asian", "Pacific", "VotingAgeCitizen", "Employed"]
